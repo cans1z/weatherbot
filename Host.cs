@@ -3,7 +3,6 @@ using System.Threading;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
-using Quartz;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace weatherbot
@@ -20,12 +19,12 @@ namespace weatherbot
         {
             _bot = new TelegramBotClient(token);
             _timerCallback = new TimerCallback(InvokeCallback);
-            _scheduleTimer = new Timer(_timerCallback, 52, 0, 1000);
+            _scheduleTimer = new Timer(_timerCallback, 52, 0, 3000);
         }
 
         public void InvokeCallback(object obj)
         {
-
+            SendMessage();
         }
 
         public void Start()
