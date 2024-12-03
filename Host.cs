@@ -5,6 +5,7 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using static System.Net.Mime.MediaTypeNames;
 
+
 namespace weatherbot
 {
     internal class Host
@@ -32,6 +33,7 @@ namespace weatherbot
             _bot.StartReceiving(UpdateHandler, ErrorHandler);
             Console.WriteLine("bot get started");
             
+                
         }
 
         private Task ErrorHandler(ITelegramBotClient client, Exception exception,

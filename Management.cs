@@ -9,7 +9,8 @@ namespace weatherbot
         {
             Host weatherbot = new Host("7814611141:AAGGDBntR2aPGqQ7AJcvxnzgPbMX-9JSaDk");
             weatherbot.Start();
-            Console.ReadLine();
+            WeatherAPI.Get();
+            
         }
     }
 }
