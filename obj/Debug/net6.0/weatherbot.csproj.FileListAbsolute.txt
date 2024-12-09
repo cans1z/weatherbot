@@ -52,3 +52,5 @@ C:\Users\canss\OneDrive\Файлы\GitHub\weatherbot\obj\Debug\net6.0\refint\wea
 C:\Users\canss\OneDrive\Файлы\GitHub\weatherbot\obj\Debug\net6.0\weatherbot.pdb
 C:\Users\canss\OneDrive\Файлы\GitHub\weatherbot\obj\Debug\net6.0\weatherbot.genruntimeconfig.cache
 C:\Users\canss\OneDrive\Файлы\GitHub\weatherbot\obj\Debug\net6.0\ref\weatherbot.dll
+C:\Users\USER\Documents\telegrambot\weatherbot\bin\Debug\net6.0\Quartz.dll
+C:\Users\USER\Documents\telegrambot\weatherbot\bin\Debug\net6.0\Newtonsoft.Json.dll

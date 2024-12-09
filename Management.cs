@@ -1,4 +1,5 @@
 ﻿using Telegram.Bot;
+using Telegram.Bot.Types;
 
 
 namespace weatherbot
@@ -9,8 +10,20 @@ namespace weatherbot
         {
             Host weatherbot = new Host("7814611141:AAGGDBntR2aPGqQ7AJcvxnzgPbMX-9JSaDk");
             weatherbot.Start();
-            WeatherAPI.Get();
-            
+
+            WeatherAPI weather = new WeatherAPI();
+            List<WeatherItem> items = weather.Get();
+            foreach (WeatherItem item in items)
+            {
+                if (item.City.Contains("Kirov"))
+                {
+                    Console.WriteLine(item.City);
+                }
+            }
+
+            Console.ReadLine();
+
+
         }
     }
 }
