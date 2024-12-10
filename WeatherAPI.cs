@@ -14,13 +14,15 @@ namespace weatherbot
     public class WeatherAPI
     {
         public Uri endpoint;
-        public WeatherAPI() { }
+        public WeatherAPI(Uri endpoint)
+        {
+            this.endpoint = endpoint;
+        }
 
         public List<WeatherItem> Get()
         {
             List<WeatherItem> listOutputValue = new List<WeatherItem>();
             var client = new HttpClient();
-            endpoint = new Uri("http://api.openweathermap.org/data/2.5/find?q=Kirov&type=like&APPID=de743d4490d7035d95832e6031995518");
             var result = client.GetAsync(endpoint).Result;
             var json = result.Content.ReadAsStringAsync().Result;
             JObject weatherData = JObject.Parse(json);

@@ -10,21 +10,23 @@ namespace weatherbot
 {
     internal class Host
     {
-        public Host()
-        {
-            uri; 
-        }
+
+
         Stack<Chat> chats = new Stack<Chat>();
         TelegramBotClient _bot;
         private TimerCallback _timerCallback;
         private Timer _scheduleTimer;
-        public Uri uri = new Uri("http://api.openweathermap.org/data/2.5/find?q=Kirov&type=like&APPID=de743d4490d7035d95832e6031995518");
+        private static string city = "Moscow";
+        public Uri uri = new Uri("http://api.openweathermap.org/data/2.5/find?q="+ city +"&type=like&APPID=de743d4490d7035d95832e6031995518");
+        private WeatherAPI weatherAPI;
+        private bool _isChange = false;
 
         public Host(string token)
         {
                 _bot = new TelegramBotClient(token);
             _timerCallback = new TimerCallback(InvokeCallback);
-            _scheduleTimer = new Timer(_timerCallback, 52, 0, 20000);
+            _scheduleTimer = new Timer(_timerCallback, 52, 0, 7000);
+            weatherAPI = new WeatherAPI(uri);
         }
 
         public void InvokeCallback(object obj)
@@ -49,8 +51,8 @@ namespace weatherbot
 
         public async Task UpdateHandler(ITelegramBotClient client, Update update, CancellationToken cancellation)
         {
-            WeatherAPI weather = new WeatherAPI();
-            List<WeatherItem> items = weather.Get();
+            
+            List<WeatherItem> items = weatherAPI.Get();
             
 
             if (update.Message?.Text == "/start")
@@ -69,9 +71,19 @@ namespace weatherbot
             }
             if (update.Message?.Text == "/change")
             {
-                (string)uri.
+                _isChange = true;
+                return;
             }
-                Console.WriteLine($"got message: {update.Message?.Text ?? "[not text]"}");
+
+            Console.WriteLine($"got message: {update.Message?.Text ?? "[not text]"}");
+            if (_isChange)
+            {
+                _isChange = false;
+                city = update.Message?.Text;
+                Console.WriteLine(city);
+                uri = new Uri("http://api.openweathermap.org/data/2.5/find?q=" + city + "&type=like&APPID=de743d4490d7035d95832e6031995518");
+                weatherAPI = new WeatherAPI(uri);
+            }
             //return client.SendTextMessageAsync(update.Message?.Chat, "неформал");
             //ChatId chatId = 7330841099;
             //await _bot.SendMessage(update.Message.Chat, "bot is active");
@@ -80,9 +92,7 @@ namespace weatherbot
 
         private async Task SendMessage()
         {
-            WeatherAPI weather = new WeatherAPI();
-            List<WeatherItem> items = weather.Get();
-            
+            List<WeatherItem> items = weatherAPI.Get();
             
             foreach (Chat chat in chats)
             {
