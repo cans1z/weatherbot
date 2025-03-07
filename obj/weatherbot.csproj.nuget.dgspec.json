@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\USER\\Documents\\telegrambot\\weatherbot\\weatherbot.csproj": {}
+    "/Users/aleksandr/Downloads/Everyday open this folder/weatherbot/weatherbot.csproj": {}
   },
   "projects": {
-    "C:\\Users\\USER\\Documents\\telegrambot\\weatherbot\\weatherbot.csproj": {
+    "/Users/aleksandr/Downloads/Everyday open this folder/weatherbot/weatherbot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER\\Documents\\telegrambot\\weatherbot\\weatherbot.csproj",
+        "projectUniqueName": "/Users/aleksandr/Downloads/Everyday open this folder/weatherbot/weatherbot.csproj",
         "projectName": "weatherbot",
-        "projectPath": "C:\\Users\\USER\\Documents\\telegrambot\\weatherbot\\weatherbot.csproj",
-        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\Documents\\telegrambot\\weatherbot\\obj\\",
+        "projectPath": "/Users/aleksandr/Downloads/Everyday open this folder/weatherbot/weatherbot.csproj",
+        "packagesPath": "/Users/aleksandr/.nuget/packages/",
+        "outputPath": "/Users/aleksandr/Downloads/Everyday open this folder/weatherbot/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/aleksandr/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -34,6 +32,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -64,12 +67,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.osx-arm64",
+              "version": "[6.0.36, 6.0.36]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.406/RuntimeIdentifierGraph.json"
         }
       }
     }
