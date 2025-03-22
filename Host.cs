@@ -10,8 +10,6 @@ namespace weatherbot
 {
     internal class Host
     {
-
-
         Stack<Chat> chats = new Stack<Chat>();
         TelegramBotClient _bot;
         private TimerCallback _timerCallback;
@@ -103,9 +101,6 @@ namespace weatherbot
                
             }
         }
-
-
-
 
     }
 }
