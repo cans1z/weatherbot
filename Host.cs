@@ -1,10 +1,12 @@
-﻿using Microsoft.VisualBasic;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
+using System;
 using System.Threading;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
+using weatherbot.Models;
 using static System.Net.Mime.MediaTypeNames;
-
 
 namespace weatherbot
 {
@@ -29,7 +31,7 @@ namespace weatherbot
 
         public void InvokeCallback(object obj)
         {
-            SendMessage();
+            SendMessages();
         }
 
         public void Start()
@@ -56,6 +58,7 @@ namespace weatherbot
             if (update.Message?.Text == "/start")
             {
                 chats.Push(update.Message.Chat);
+                AddUser(new Models.User {TgId = update.Message.Chat.Id});
             }
             if (update.Message?.Text == "/send")
             {
@@ -69,7 +72,8 @@ namespace weatherbot
             }
             if (update.Message?.Text == "/change")
             {
-                _isChange = true;
+                //_bot.SendMessage(user.TgId, "penis");
+                
                 return;
             }
 
@@ -86,21 +90,63 @@ namespace weatherbot
             //ChatId chatId = 7330841099;
             //await _bot.SendMessage(update.Message.Chat, "bot is active");
 
+
         }
 
-        private async Task SendMessage()
+
+
+        private async Task SendMessages()
         {
             List<WeatherItem> items = weatherAPI.Get();
-            
-            foreach (Chat chat in chats)
+            List<Models.User> users = ListAllUsers();
+            Console.WriteLine();
+            foreach (Models.User user in users)
             {
-                foreach (WeatherItem item in items)
+                //_bot.SendMessage(user.TgId, "penis");
+                var item = items[0];
+                _bot.SendMessage(user.TgId, item.City + "\n" + item.Temp + "\n" + item.Humidity + "\n" + item.Description);
+            }
+
+        }
+
+        public void AddUser(Models.User user)
+        {
+            if (GetUser(user.TgId) == null)
+            {
+                using (var db = new ApplicationContext())
                 {
-                    _bot.SendMessage(chat, item.City + "\n" + item.Temp + "\n" + item.Humidity + "\n" + item.Description);
+                    db.Users.Add(user);
+                    db.SaveChanges();
                 }
-               
             }
         }
 
+        public Models.User? GetUser(long tgid)
+        {
+            using (var db = new ApplicationContext())
+            {
+                return db.Users.Where(item => item.TgId == tgid).FirstOrDefault();
+            }
+        }
+
+        public void ChangeCity(long tgid, string city)
+        {
+            using (var db = new ApplicationContext())
+            {
+                var user = 
+                    db.Users.Where(item => item.TgId == tgid).FirstOrDefault();
+                if (user == null) return;
+                user.City = city;
+                db.SaveChanges();
+            }
+        }
+
+        public List<Models.User> ListAllUsers()
+        {
+            using (var db = new ApplicationContext())
+            {
+                return db.Users.ToList();
+            }
+        }
     }
 }
