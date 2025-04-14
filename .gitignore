@@ -77,3 +77,6 @@ bin/Debug/net8.0/weatherbot.dll
 bin/Debug/net8.0/weatherbot.exe
 /bin/Debug/net8.0
 /bin
+obj/project.assets.json
+/obj
+/.vs/weatherbot/v17
