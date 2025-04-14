@@ -5,6 +5,8 @@ using System.Threading;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
 using weatherbot.Models;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -19,7 +21,7 @@ namespace weatherbot
         private static string city = "Moscow";
         public Uri uri = new Uri("http://api.openweathermap.org/data/2.5/find?q="+ city +"&type=like&APPID=de743d4490d7035d95832e6031995518");
         private WeatherAPI weatherAPI;
-        private bool _isChange = false;
+       
 
         public Host(string token)
         {
@@ -73,6 +75,8 @@ namespace weatherbot
             if (update.Message?.Text == "/change")
             {
                 //_bot.SendMessage(user.TgId, "penis");
+
+                await _bot.SendMessage(update.Message.Chat.Id, "Введите название города:");
                 
                 return;
             }
