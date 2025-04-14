@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,11 @@ namespace weatherbot.Models
         [Key]
         public int Id { get; set; }
         public long TgId { get; set; }
-        public string? City { get; set; }
-        public string? State { get; set; }
+
+        [DefaultValue("Moscow")]
+        public string? City { get; set; } = "Moscow";
+
+        [DefaultValue("default")]
+        public string State { get; set; } = "default";
     }
 }
