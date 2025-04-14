@@ -8,6 +8,7 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using weatherbot.Models;
+using weatherbot.Providers;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static System.Net.Mime.MediaTypeNames;
 using Update = Telegram.Bot.Types.Update;
@@ -16,12 +17,9 @@ namespace weatherbot
 {
     internal class Host
     {
-        Stack<Chat> chats = new Stack<Chat>();
         TelegramBotClient _bot;
         private TimerCallback _timerCallback;
         private Timer _scheduleTimer;
-        private static string city = "Moscow";
-        //public Uri uri = new Uri("http://api.openweathermap.org/data/2.5/find?q="+ city +"&type=like&APPID=de743d4490d7035d95832e6031995518");
         private WeatherAPI weatherAPI;
        
 
@@ -35,6 +33,7 @@ namespace weatherbot
 
         public void InvokeCallback(object obj)
         {
+            
             SendMessages();
         }
 
@@ -56,78 +55,39 @@ namespace weatherbot
         public async Task UpdateHandler(ITelegramBotClient client, Update update, CancellationToken cancellation)
         {
 
-            using (var db = new ApplicationContext())
-            {
-                var user =
-                db.Users.Where(item => item.TgId == update.Message.Chat.Id).FirstOrDefault();
-                if (user.State == "change")
-                {
-                    var city = update.Message?.Text;
-                    ChangeCity(update.Message.Chat.Id, city);
-                    user.State = "default";
-                }
-                db.SaveChanges();
-
-            }
-
-            List<WeatherItem> items = weatherAPI.Get();
-            
-
             if (update.Message?.Text == "/start")
             {
-                chats.Push(update.Message.Chat);
-                AddUser(new Models.User {TgId = update.Message.Chat.Id});
-            }
-            if (update.Message?.Text == "/send")
-            {
-                foreach (Chat chat in chats) 
+                try
                 {
-                    foreach (WeatherItem item in items)
-                    {
-                        
-                    }
+                    AddUser(new Models.User { TgId = update.Message.Chat.Id });
                 }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Error: {e.StackTrace}");
+                }
+                
             }
+
+            var user = UserProvider.GetUser(update.Message.Chat.Id);
+            if (user != null && user.State == "change")
+            {
+                var city = update.Message?.Text;
+                ChangeCity(update.Message.Chat.Id, city);
+            }
+
             if (update.Message?.Text == "/change")
             {
                 //_bot.SendMessage(user.TgId, "penis");
 
                 await _bot.SendMessage(update.Message.Chat.Id, "Введите название города:");
-                using (var db = new ApplicationContext())
-                {
-                    var user =
-                    db.Users.Where(item => item.TgId == update.Message.Chat.Id).FirstOrDefault();
-                    user.State = "change";
-                    db.SaveChanges();
-                }
+                UserProvider.ChangeState(update.Message.Chat.Id, "change");
                 return;
             }
 
-            using (var db = new ApplicationContext())
-            {
-                var user =
-                db.Users.Where(item => item.TgId == update.Message.Chat.Id).FirstOrDefault();
-                Console.WriteLine($"got message: {update.Message?.Text ?? "[not text]"}");
-                Uri uri = new Uri("http://api.openweathermap.org/data/2.5/find?q=" + user.City + "&type=like&APPID=de743d4490d7035d95832e6031995518");
-                weatherAPI = new WeatherAPI(uri);
-            }
-
-            //Console.WriteLine($"got message: {update.Message?.Text ?? "[not text]"}");
-            //uri = new Uri("http://api.openweathermap.org/data/2.5/find?q=" + city + "&type=like&APPID=de743d4490d7035d95832e6031995518");
-            //weatherAPI = new WeatherAPI(uri);
-
-
-            //if (_isChange)
-            //{
-            //    _isChange = false;
-            //    city = update.Message?.Text;
-            //    Console.WriteLine(city);
-            //    uri = new Uri("http://api.openweathermap.org/data/2.5/find?q=" + city + "&type=like&APPID=de743d4490d7035d95832e6031995518");
-            //    weatherAPI = new WeatherAPI(uri);
-            //}
-            //return client.SendTextMessageAsync(update.Message?.Chat, "неформал");
-            //ChatId chatId = 7330841099;
-            //await _bot.SendMessage(update.Message.Chat, "bot is active");
+            var user3 = UserProvider.GetUser(update.Message.Chat.Id);
+            Console.WriteLine($"got message: {update.Message?.Text ?? "[not text]"}");
+            Uri uri = new Uri("http://api.openweathermap.org/data/2.5/find?q=" + user3.City + "&type=like&APPID=de743d4490d7035d95832e6031995518");
+            weatherAPI = new WeatherAPI(uri);
         }
 
 
@@ -149,21 +109,13 @@ namespace weatherbot
 
         public void AddUser(Models.User user)
         {
-            if (GetUser(user.TgId) == null)
+            if (UserProvider.GetUser(user.TgId) == null)
             {
                 using (var db = new ApplicationContext())
                 {
                     db.Users.Add(user);
                     db.SaveChanges();
                 }
-            }
-        }
-
-        public Models.User? GetUser(long tgid)
-        {
-            using (var db = new ApplicationContext())
-            {
-                return db.Users.Where(item => item.TgId == tgid).FirstOrDefault();
             }
         }
 
@@ -175,6 +127,7 @@ namespace weatherbot
                     db.Users.Where(item => item.TgId == tgid).FirstOrDefault();
                 if (user == null) return;
                 user.City = city;
+                user.State = "default";
                 db.SaveChanges();
             }
         }

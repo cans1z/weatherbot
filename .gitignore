@@ -70,3 +70,10 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+.vs/weatherbot/v17/.suo
+.vs/weatherbot/v17/.suo
+.vs/weatherbot/v17/.suo
+bin/Debug/net8.0/weatherbot.dll
+bin/Debug/net8.0/weatherbot.exe
+/bin/Debug/net8.0
+/bin
