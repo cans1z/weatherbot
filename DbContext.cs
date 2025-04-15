@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using weatherbot.Models;
-using static weatherbot.Host;
+using static weatherbot.Management;
 
 namespace weatherbot;
 public class ApplicationContext : DbContext
 {
     public DbSet<User> Users { get; set; } = null!;
+    public DbSet<Time> Times { get; set; } = null!;
     public ApplicationContext() => Database.EnsureCreated();
 
 
