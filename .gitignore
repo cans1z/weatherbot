@@ -71,3 +71,8 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 .vs\
 bin\
+/.vs
+/obj
+/obj
+/obj
+/bin

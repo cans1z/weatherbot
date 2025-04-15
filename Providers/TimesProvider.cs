@@ -17,5 +17,14 @@ namespace weatherbot.Providers
                 return db.Times.Where(item => item.UserId == userid).ToList();
             }
         }
+
+        public static void AddTime(Time time)
+        {
+            using (var db = new ApplicationContext())
+            {
+                db.Times.Add(time);
+                db.SaveChanges();
+            }
+        }
     }
 }

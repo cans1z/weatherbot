@@ -18,7 +18,7 @@ namespace weatherbot.Providers
 
         public static void AddUser(Models.User user)
         {
-            if (UserProvider.GetUser(user.TgId) == null)
+            if (GetUser(user.TgId) == null)
             {
                 using (var db = new ApplicationContext())
                 {

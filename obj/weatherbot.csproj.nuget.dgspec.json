@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bastard\\Documents\\GitHub\\weatherbot\\weatherbot.csproj": {}
+    "C:\\Users\\personal pc\\Documents\\GitHub\\weatherbot\\weatherbot.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bastard\\Documents\\GitHub\\weatherbot\\weatherbot.csproj": {
+    "C:\\Users\\personal pc\\Documents\\GitHub\\weatherbot\\weatherbot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bastard\\Documents\\GitHub\\weatherbot\\weatherbot.csproj",
+        "projectUniqueName": "C:\\Users\\personal pc\\Documents\\GitHub\\weatherbot\\weatherbot.csproj",
         "projectName": "weatherbot",
-        "projectPath": "C:\\Users\\bastard\\Documents\\GitHub\\weatherbot\\weatherbot.csproj",
-        "packagesPath": "C:\\Users\\bastard\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bastard\\Documents\\GitHub\\weatherbot\\obj\\",
+        "projectPath": "C:\\Users\\personal pc\\Documents\\GitHub\\weatherbot\\weatherbot.csproj",
+        "packagesPath": "C:\\Users\\personal pc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\personal pc\\Documents\\GitHub\\weatherbot\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\bastard\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\personal pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

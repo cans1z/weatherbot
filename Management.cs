@@ -57,7 +57,8 @@ namespace weatherbot
 
             if (update.Message?.Text == "/start")
             {
-                 UserProvider.AddUser(new Models.User { TgId = update.Message.Chat.Id });
+                UserProvider.AddUser(new Models.User { TgId = update.Message.Chat.Id });
+                TimesProvider.AddTime(new Time { UserId = UserProvider.GetUser(update.Message.Chat.Id).Id });
             }
 
             var user = UserProvider.GetUser(update.Message.Chat.Id);
@@ -69,10 +70,15 @@ namespace weatherbot
 
             if (update.Message?.Text == "/change city")
             {
-                //_bot.SendMessage(user.TgId, "penis");
-
                 await _bot.SendMessage(update.Message.Chat.Id, "Введите название города:");
                 UserProvider.ChangeState(update.Message.Chat.Id, "change city");
+                return;
+            }
+
+            if (update.Message?.Text == "/change time")
+            {
+                await _bot.SendMessage(update.Message.Chat.Id, "Введите время для отправки сообщений:");
+                UserProvider.ChangeState(update.Message.Chat.Id, "change time");
                 return;
             }
 
