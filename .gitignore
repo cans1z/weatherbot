@@ -76,3 +76,7 @@ bin\
 /obj
 /obj
 /bin
+/.vs
+.vs/weatherbot/v17/.suo
+.vs/weatherbot/v17/.futdcache.v2
+*.v2
