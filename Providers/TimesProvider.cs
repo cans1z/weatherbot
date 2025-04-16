@@ -26,5 +26,13 @@ namespace weatherbot.Providers
                 db.SaveChanges();
             }
         }
+
+        public static List<Time> ListAllTimes()
+        {
+            using (var db = new ApplicationContext())
+            {
+                return db.Times.ToList();
+            }
+        }
     }
 }

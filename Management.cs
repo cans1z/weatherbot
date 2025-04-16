@@ -81,11 +81,6 @@ namespace weatherbot
                 UserProvider.ChangeState(update.Message.Chat.Id, "change time");
                 return;
             }
-
-            var user2 = UserProvider.GetUser(update.Message.Chat.Id);
-            Console.WriteLine($"got message: {update.Message?.Text ?? "[not text]"}");
-            Uri uri = new Uri("http://api.openweathermap.org/data/2.5/find?q=" + user2.City + "&type=like&APPID=de743d4490d7035d95832e6031995518");
-            weatherAPI = new WeatherAPI(uri);
         }
 
 
