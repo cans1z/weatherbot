@@ -81,3 +81,10 @@ bin\
 .vs/weatherbot/v17/.futdcache.v2
 *.v2
 .vs/weatherbot/v17/.suo
+*.dll
+bin/Debug/net8.0/weatherbot.exe
+.vs/weatherbot/v17/.suo
+.vs/weatherbot/v17/.futdcache.v2
+.vs/weatherbot/v17/.futdcache.v2
+bin/Debug/net8.0/weatherbot.dll
+bin/Debug/net8.0/weatherbot.exe
