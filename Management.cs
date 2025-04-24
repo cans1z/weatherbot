@@ -44,8 +44,6 @@ namespace weatherbot
             _bot.StartReceiving(UpdateHandler, ErrorHandler);
             Console.WriteLine("bot get started");
         }
-                
-       
 
         private Task ErrorHandler(ITelegramBotClient client, Exception exception,
             HandleErrorSource errorSource, CancellationToken cancellation)
@@ -57,31 +55,6 @@ namespace weatherbot
         public async Task UpdateHandler(ITelegramBotClient client, Update update, CancellationToken cancellation)
         {
             var user = UserProvider.GetUser(update.Message.Chat.Id  );
-            /*if (update.Message?.Text == "/start")
-            {
-                UserProvider.AddUser(new Models.User { TgId = update.Message.Chat.Id });
-                TimesProvider.AddTime(new Time { UserId = UserProvider.GetUser(update.Message.Chat.Id).Id });
-            }
-
-            if (user != null && user.State == "change city")
-            {
-                var city = update.Message?.Text;
-                UserProvider.ChangeCity(update.Message.Chat.Id, city);
-            }
-
-            if (update.Message?.Text == "/change city")
-            {
-                await _bot.SendMessage(update.Message.Chat.Id, "Введите название города:");
-                UserProvider.ChangeState(update.Message.Chat.Id, "change city");
-                return;
-            }
-
-            if (update.Message?.Text == "/change time")
-            {
-                await _bot.SendMessage(update.Message.Chat.Id, "Введите время для отправки сообщений:");
-                UserProvider.ChangeState(update.Message.Chat.Id, "change time");
-                return;
-            }*/
 
             switch (update.Message?.Text)
             {
@@ -107,6 +80,7 @@ namespace weatherbot
                     UserProvider.ChangeState(update.Message.Chat.Id, "change time");
                     return;
             }
+
             if (user != null && user.State == "change city")
             {
                 var city = update.Message?.Text;
@@ -136,6 +110,7 @@ namespace weatherbot
             {
                 string time = update.Message.Text;
                 TimesProvider.AddTime(new Time { UserId = UserProvider.GetUser(update.Message.Chat.Id).Id, TimeStr = time });
+                await _bot.SendMessage(update.Message.Chat.Id, "Время было успешно добавлено");
                 UserProvider.ChangeState(update.Message.Chat.Id, "default");
             }
             
@@ -143,13 +118,16 @@ namespace weatherbot
             {
                 string timestr = update.Message.Text;
                 var time = TimesProvider.GetTime(timestr);
-                TimesProvider.DeleteTime(time);
+                if (time != null)
+                {
+                    TimesProvider.DeleteTime(time);
+                    await _bot.SendMessage(update.Message.Chat.Id, "Время было успешно удалено");
+                }
+                else await _bot.SendMessage(update.Message.Chat.Id, "Вы ввели несуществующее время, введите время из списка выше");
                 UserProvider.ChangeState(update.Message.Chat.Id, "default");
             }
 
         }
-
-
 
         private async Task SendMessages()
         {
