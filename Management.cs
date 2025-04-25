@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.VisualBasic;
 using System;
+using System.Globalization;
 using System.Threading;
 using System.Timers;
 using Telegram.Bot;
@@ -108,9 +109,16 @@ namespace weatherbot
 
             if (user.State == "add time")
             {
-                string time = update.Message.Text;
-                TimesProvider.AddTime(new Time { UserId = UserProvider.GetUser(update.Message.Chat.Id).Id, TimeStr = time });
-                await _bot.SendMessage(update.Message.Chat.Id, "Время было успешно добавлено");
+                string _time = update.Message.Text;
+                if (DateTime.TryParseExact(_time, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime time))
+                {
+                    await _bot.SendMessage(update.Message.Chat.Id, "Время было успешно добавлено");
+                    TimesProvider.AddTime(new Time { UserId = UserProvider.GetUser(update.Message.Chat.Id).Id, TimeStr = _time });
+                }
+                else
+                {
+                    await _bot.SendMessage(update.Message.Chat.Id, "Неверный формат времени. Пожалуйста, введите в формате HH:mm (например, 22:34).");
+                }
                 UserProvider.ChangeState(update.Message.Chat.Id, "default");
             }
             
