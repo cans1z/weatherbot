@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using weatherbot.Models;
 
 namespace weatherbot.Providers
 {
@@ -16,15 +17,13 @@ namespace weatherbot.Providers
             }
         }
 
-        public static void AddUser(Models.User user)
+        public static User? AddUser(User user)
         {
-            if (GetUser(user.TgId) == null)
+            using (var db = new ApplicationContext())
             {
-                using (var db = new ApplicationContext())
-                {
-                    db.Users.Add(user);
-                    db.SaveChanges();
-                }
+                var newuser = db.Users.Add(user).Entity;
+                db.SaveChanges();
+                return newuser;
             }
         }
 
