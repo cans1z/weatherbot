@@ -15,6 +15,7 @@ using weatherbot.Models;
 using weatherbot.Providers;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static System.Net.Mime.MediaTypeNames;
+using static weatherbot.Cities;
 using Timer = System.Threading.Timer;
 using Update = Telegram.Bot.Types.Update;
 
@@ -44,6 +45,8 @@ namespace weatherbot
         {
             _bot.StartReceiving(UpdateHandler, ErrorHandler);
             Console.WriteLine("bot get started");
+            List<City> items = Get();
+            Console.WriteLine(items);
         }
 
         private Task ErrorHandler(ITelegramBotClient client, Exception exception,
