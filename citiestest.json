@@ -1,0 +1,348 @@
+{
+    "CitiesTest": [
+        {
+            "en": "Moscow",
+            "ru": "Москва"
+        },
+        {
+            "en": "Saint Petersburg",
+            "ru": "Санкт-Петербург"
+        },
+        {
+            "en": "Novosibirsk",
+            "ru": "Новосибирск"
+        },
+        {
+            "en": "Yekaterinburg",
+            "ru": "Екатеринбург"
+        },
+        {
+            "en": "Kazan",
+            "ru": "Казань"
+        },
+        {
+            "en": "Nizhny Novgorod",
+            "ru": "Нижний Новгород"
+        },
+        {
+            "en": "Chelyabinsk",
+            "ru": "Челябинск"
+        },
+        {
+            "en": "Samara",
+            "ru": "Самара"
+        },
+        {
+            "en": "Omsk",
+            "ru": "Омск"
+        },
+        {
+            "en": "Rostov-on-Don",
+            "ru": "Ростов-на-Дону"
+        },
+        {
+            "en": "Ufa",
+            "ru": "Уфа"
+        },
+        {
+            "en": "Krasnoyarsk",
+            "ru": "Красноярск"
+        },
+        {
+            "en": "Perm",
+            "ru": "Пермь"
+        },
+        {
+            "en": "Voronezh",
+            "ru": "Воронеж"
+        },
+        {
+            "en": "Volgograd",
+            "ru": "Волгоград"
+        },
+        {
+            "en": "Saratov",
+            "ru": "Саратов"
+        },
+        {
+            "en": "Krasnodar",
+            "ru": "Краснодар"
+        },
+        {
+            "en": "Tolyatti",
+            "ru": "Тольятти"
+        },
+        {
+            "en": "Izhevsk",
+            "ru": "Ижевск"
+        },
+        {
+            "en": "Barnaul",
+            "ru": "Барнаул"
+        },
+        {
+            "en": "Ulyanovsk",
+            "ru": "Ульяновск"
+        },
+        {
+            "en": "Irkutsk",
+            "ru": "Иркутск"
+        },
+        {
+            "en": "Khabarovsk",
+            "ru": "Хабаровск"
+        },
+        {
+            "en": "Yaroslavl",
+            "ru": "Ярославль"
+        },
+        {
+            "en": "Vladivostok",
+            "ru": "Владивосток"
+        },
+        {
+            "en": "Makhachkala",
+            "ru": "Махачкала"
+        },
+        {
+            "en": "Tomsk",
+            "ru": "Томск"
+        },
+        {
+            "en": "Orenburg",
+            "ru": "Оренбург"
+        },
+        {
+            "en": "Kemerovo",
+            "ru": "Кемерово"
+        },
+        {
+            "en": "Novokuznetsk",
+            "ru": "Новокузнецк"
+        },
+        {
+            "en": "Ryazan",
+            "ru": "Рязань"
+        },
+        {
+            "en": "Astrakhan",
+            "ru": "Астрахань"
+        },
+        {
+            "en": "Naberezhnye Chelny",
+            "ru": "Набережные Челны"
+        },
+        {
+            "en": "Penza",
+            "ru": "Пенза"
+        },
+        {
+            "en": "Lipetsk",
+            "ru": "Липецк"
+        },
+        {
+            "en": "Tula",
+            "ru": "Тула"
+        },
+        {
+            "en": "Kirov",
+            "ru": "Киров"
+        },
+        {
+            "en": "Cheboksary",
+            "ru": "Чебоксары"
+        },
+        {
+            "en": "Kaliningrad",
+            "ru": "Калининград"
+        },
+        {
+            "en": "Bryansk",
+            "ru": "Брянск"
+        },
+        {
+            "en": "Kursk",
+            "ru": "Курск"
+        },
+        {
+            "en": "Ivanovo",
+            "ru": "Иваново"
+        },
+        {
+            "en": "Magnitogorsk",
+            "ru": "Магнитогорск"
+        },
+        {
+            "en": "Tver",
+            "ru": "Тверь"
+        },
+        {
+            "en": "Stavropol",
+            "ru": "Ставрополь"
+        },
+        {
+            "en": "Nizhny Tagil",
+            "ru": "Нижний Тагил"
+        },
+        {
+            "en": "Murmansk",
+            "ru": "Мурманск"
+        },
+        {
+            "en": "Vladimir",
+            "ru": "Владимир"
+        },
+        {
+            "en": "Arkhangelsk",
+            "ru": "Архангельск"
+        },
+        {
+            "en": "Chita",
+            "ru": "Чита"
+        },
+        {
+            "en": "Severodvinsk",
+            "ru": "Северодвинск"
+        },
+        {
+            "en": "Balashikha",
+            "ru": "Балашиха"
+        },
+        {
+            "en": "Podolsk",
+            "ru": "Подольск"
+        },
+        {
+            "en": "Khimki",
+            "ru": "Химки"
+        },
+        {
+            "en": "Korolyov",
+            "ru": "Королёв"
+        },
+        {
+            "en": "Zelenograd",
+            "ru": "Зеленоград"
+        },
+        {
+            "en": "Engels",
+            "ru": "Энгельс"
+        },
+        {
+            "en": "Sterlitamak",
+            "ru": "Стерлитамак"
+        },
+        {
+            "en": "Nizhnevartovsk",
+            "ru": "Нижневартовск"
+        },
+        {
+            "en": "Dzerzhinsk",
+            "ru": "Дзержинск"
+        },
+        {
+            "en": "Bratsk",
+            "ru": "Братск"
+        },
+        {
+            "en": "Orsk",
+            "ru": "Орск"
+        },
+        {
+            "en": "Angarsk",
+            "ru": "Ангарск"
+        },
+        {
+            "en": "Blagoveshchensk",
+            "ru": "Благовещенск"
+        },
+        {
+            "en": "Yakutsk",
+            "ru": "Якутск"
+        },
+        {
+            "en": "Surgut",
+            "ru": "Сургут"
+        },
+        {
+            "en": "Prokopyevsk",
+            "ru": "Прокопьевск"
+        },
+        {
+            "en": "Volzhsky",
+            "ru": "Волжский"
+        },
+        {
+            "en": "Novocheboksarsk",
+            "ru": "Новочебоксарск"
+        },
+        {
+            "en": "Komsomolsk-on-Amur",
+            "ru": "Комсомольск-на-Амуре"
+        },
+        {
+            "en": "Nefteyugansk",
+            "ru": "Нефтеюганск"
+        },
+        {
+            "en": "Petrozavodsk",
+            "ru": "Петрозаводск"
+        },
+        {
+            "en": "Novy Urengoy",
+            "ru": "Новый Уренгой"
+        },
+        {
+            "en": "Kamensk-Uralsky",
+            "ru": "Каменск-Уральский"
+        },
+        {
+            "en": "Biysk",
+            "ru": "Бийск"
+        },
+        {
+            "en": "Rubtsovsk",
+            "ru": "Рубцовск"
+        },
+        {
+            "en": "Nalchik",
+            "ru": "Нальчик"
+        },
+        {
+            "en": "Nazran",
+            "ru": "Назрань"
+        },
+        {
+            "en": "Grozny",
+            "ru": "Грозный"
+        },
+        {
+            "en": "Ussuriysk",
+            "ru": "Уссурийск"
+        },
+        {
+            "en": "Achinsk",
+            "ru": "Ачинск"
+        },
+        {
+            "en": "Zlatoust",
+            "ru": "Златоуст"
+        },
+        {
+            "en": "Miass",
+            "ru": "Миасс"
+        },
+        {
+            "en": "Abakan",
+            "ru": "Абакан"
+        },
+        {
+            "en": "Veliky Novgorod",
+            "ru": "Великий Новгород"
+        },
+        {
+            "en": "Vologda",
+            "ru": "Вологда"
+        }
+    ]
+}

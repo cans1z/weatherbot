@@ -13,11 +13,12 @@ using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using weatherbot.Models;
 using weatherbot.Providers;
+using weatherbot.Services;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static System.Net.Mime.MediaTypeNames;
-using static weatherbot.Cities;
 using Timer = System.Threading.Timer;
 using Update = Telegram.Bot.Types.Update;
+
 
 namespace weatherbot
 {
@@ -27,6 +28,7 @@ namespace weatherbot
         private TimerCallback _timerCallback;
         private Timer _scheduleTimer;
         private WeatherAPI weatherAPI;
+        public List<City>? AvailableCities { get; private set; }
        
 
         public Management(string token)
@@ -45,8 +47,9 @@ namespace weatherbot
         {
             _bot.StartReceiving(UpdateHandler, ErrorHandler);
             Console.WriteLine("bot get started");
-            List<City> items = Get();
-            Console.WriteLine(items);
+            AvailableCities = CitiesService.GetCities();
+            //Console.WriteLine(string.Join(",", items.Select(item => item.Name)));
+                    
         }
 
         private Task ErrorHandler(ITelegramBotClient client, Exception exception,
@@ -58,6 +61,11 @@ namespace weatherbot
 
         public async Task UpdateHandler(ITelegramBotClient client, Update update, CancellationToken cancellation)
         {
+            if (update.Message == null)
+            {
+                Console.WriteLine("редачат пидорасы");
+                return;
+            }
             var user = UserProvider.GetUser(update.Message.Chat.Id  );
 
             switch (update.Message?.Text)
@@ -93,6 +101,11 @@ namespace weatherbot
             if (user != null && user.State == "change city")
             {
                 var city = update.Message?.Text;
+                /*if (AvailableCities.Where(item => item.Name == city).FirstOrDefault() == null)
+                {
+                    await _bot.SendMessage(update.Message.Chat.Id, "еблан ты нет такого сити");
+                    return;
+                }*/
                 UserProvider.ChangeCity(update.Message.Chat.Id, city);
             }
 
@@ -169,7 +182,8 @@ namespace weatherbot
                 weatherAPI = new WeatherAPI(uri);
                 List<WeatherItem> items = weatherAPI.Get();
                 var item = items[0];
-                _bot.SendMessage(user.TgId, item.City + "\n" + item.Temp + "\n" + item.Humidity + "\n" + item.Description);
+                //_bot.SendMessage(user.TgId, item.City + "\n" + item.Temp + "\n" + item.Humidity + "\n" + item.Description);
+                _bot.SendMessage(user.TgId, await AiService.FormatWeatherByAi(item.City + "\n" + item.Temp + "\n" + item.Humidity + "\n" + item.Description));
             }
             
         }

@@ -15,4 +15,16 @@
     <PackageReference Include="Telegram.Bot" Version="22.1.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="cities.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="citiestest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ai_context.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

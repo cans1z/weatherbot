@@ -33,7 +33,7 @@ namespace weatherbot.Services
         /// <returns>Ответ нейросети</returns>
         public static async Task<string?> MakeRequest(string modelName, string pattern, string messageContent)
         {
-            string token = "7953678775:AAFZsStZJbKaHfZlKwKof0Wx8iJ924-MP1Q";
+            string token = "shds-chuvXBR1SmgS3YO2l7pDAKoyxz7";
             string uri = "https://gptunnel.ru/v1/chat/completions";
 
             using (HttpClient client = new HttpClient())

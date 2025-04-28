@@ -9,7 +9,7 @@ using System.Net.Http.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace weatherbot
+namespace weatherbot.Services
 {
     public class WeatherAPI
     {
@@ -33,13 +33,7 @@ namespace weatherbot
                 string _city = $"Город: {city["name"]}";
                 string temp = $"Температура: {(double)city["main"]["temp"] - 273.15:F1} °C";
                 string humidity = $"Влажность: {city["main"]["humidity"]}%"; 
-                string description = $"Описание погоды: {city["weather"][0]["description"]}";
-                //Console.WriteLine(_city);
-                //Console.WriteLine(temp);
-                //Console.WriteLine(humidity);
-                //Console.WriteLine(description);
-                //Console.WriteLine("--------------------");
-
+                string description = $"Описание погоды: {city["weather"][0]["description"]}"; 
                 WeatherItem weatherItem = new WeatherItem(_city, temp, humidity, description);
                 listOutputValue.Add(weatherItem);
             }

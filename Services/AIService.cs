@@ -19,14 +19,13 @@ namespace weatherbot.Services
             return File.ReadAllText("ai_context.txt");
         }
 
-        private static readonly string AiAnswerPattern = "(Yes|No)\\ \\\"([^\\n]+)\\\"";
-        public static async Task<AiRequestData?> CheckReviewByAi(string reviewText)
+        public static async Task<string?> FormatWeatherByAi(string inputText)
         {
             try
             {
-                string model = "deepseek-3";
+                string model = "gpt-4.1-mini";
                 string pattern = GetAiContext();
-                string? aiAnswer = await AiApi.MakeRequest(model, pattern, reviewText);
+                string? aiAnswer = await AiApi.MakeRequest(model, pattern, inputText);
 
                 if (aiAnswer == null)
                 {
@@ -34,29 +33,11 @@ namespace weatherbot.Services
                     return null;
                 }
 
-                // вот пример как может выглядет aiAnswer:
-                // Yes "Отзыв принят. Спасибо за ваше замечание!"
-
-                // сперва нужно получить acceptedStatus
-                var match = Regex.Match(aiAnswer, AiAnswerPattern);
-                if (match == null || match.Groups.Count != 3)
-                {
-                    Console.WriteLine("Ошибка парсинга ответа ии-модели");
-                    return null;
-                }
-
-                string state = match.Groups[1].Value;
-                string summary = match.Groups[2].Value;
-
-                return new AiRequestData
-                {
-                    AcceptedStatus = state.Equals("Yes"),
-                    Summary = summary
-                };
+                return aiAnswer;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GetAiContext.CheckReviewByAi - произошла ошибка:\n" +
+                Console.WriteLine("GetAiContext.FormatWeatherByAi - произошла ошибка:\n" +
                     ex.StackTrace);
                 return null;
             }
