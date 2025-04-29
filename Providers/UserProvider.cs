@@ -1,64 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using weatherbot.Models;
+﻿using weatherbot.Models;
 
-namespace weatherbot.Providers
+namespace weatherbot.Providers;
+
+internal class UserProvider
 {
-    internal class UserProvider
+    public static User? GetUser(long tgid)
     {
-        public static Models.User? GetUser(long tgid)
+        using (var db = new ApplicationContext())
         {
-            using (var db = new ApplicationContext())
-            {
-                return db.Users.Where(item => item.TgId == tgid).FirstOrDefault();
-            }
+            return db.Users.Where(item => item.TgId == tgid).FirstOrDefault();
         }
+    }
 
-        public static User? AddUser(User user)
+    public static User? AddUser(User user)
+    {
+        using (var db = new ApplicationContext())
         {
-            using (var db = new ApplicationContext())
-            {
-                var newuser = db.Users.Add(user).Entity;
-                db.SaveChanges();
-                return newuser;
-            }
+            var newuser = db.Users.Add(user).Entity;
+            db.SaveChanges();
+            return newuser;
         }
+    }
 
-        public static List<Models.User> ListAllUsers()
+    public static List<User> ListAllUsers()
+    {
+        using (var db = new ApplicationContext())
         {
-            using (var db = new ApplicationContext())
-            {
-                return db.Users.ToList();
-            }
+            return db.Users.ToList();
         }
+    }
 
 
-        public static void ChangeState(long tgid, string state)
+    public static void ChangeState(long tgid, string state)
+    {
+        using (var db = new ApplicationContext())
         {
-            using (var db = new ApplicationContext())
-            {
-                var user =
+            var user =
                 db.Users.Where(item => item.TgId == tgid).FirstOrDefault();
-                user.State = state;
-                db.SaveChanges();
-            }
+            user.State = state;
+            db.SaveChanges();
         }
+    }
 
-        public static void ChangeCity(long tgid, string city)
+    public static void ChangeCity(long tgid, string city)
+    {
+        using (var db = new ApplicationContext())
         {
-            using (var db = new ApplicationContext())
-            {
-                var user =
-                    db.Users.Where(item => item.TgId == tgid).FirstOrDefault();
-                if (user == null) return;
-                user.City = city;
-                user.State = "default";
-                db.SaveChanges();
-            }
+            var user =
+                db.Users.Where(item => item.TgId == tgid).FirstOrDefault();
+            if (user == null) return;
+            user.City = city;
+            user.State = "default";
+            db.SaveChanges();
         }
-
     }
 }

@@ -1,62 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace weatherbot.Services
+namespace weatherbot.Services;
+
+internal class CitiesService
 {
-    internal class CitiesService
+    /// <summary>
+    ///     Верет нулл если еррор или террор
+    /// </summary>
+    /// <returns>аббаюдна</returns>
+    public static List<City>? GetCities()
     {
-        /// <summary>
-        /// Верет нулл если еррор или террор
-        /// </summary>
-        /// <returns>аббаюдна</returns>
-        public static List<City>? GetCities()
+        try
         {
-            try
+            using (var streamReader = new StreamReader("cities.json"))
             {
-                using (StreamReader streamReader = new StreamReader("cities.json"))
+                /*string jsonContent = streamReader.ReadToEnd();
+                CitiesCollector? items = JsonConvert.DeserializeObject<CitiesCollector>(jsonContent);
+
+                return items?.Cities
+                    .Select(item => new City { Name = item })
+                    .ToList();*/
+                var outputcities = new List<City>();
+                var json = streamReader.ReadToEnd();
+                var items = JsonConvert.DeserializeObject<CitiesCollector>(json);
+                foreach (var city in items.Cities)
                 {
-                    /*string jsonContent = streamReader.ReadToEnd();
-                    CitiesCollector? items = JsonConvert.DeserializeObject<CitiesCollector>(jsonContent);
-
-                    return items?.Cities
-                        .Select(item => new City { Name = item })
-                        .ToList();*/
-                    List<City> outputcities = new List<City>();
-                    string json = streamReader.ReadToEnd();
-                    CitiesCollector? items = JsonConvert.DeserializeObject<CitiesCollector>(json);
-                    foreach (string city in items.Cities)
-                    { 
-                        City city1 = new City(city);
-                        outputcities.Add(city1);
-                    }
-                    return outputcities;
+                    var city1 = new City(city);
+                    outputcities.Add(city1);
                 }
-            }
-            catch (Exception ex)
-            {
-                return null;
+
+                return outputcities;
             }
         }
-    }
-
-    internal class CitiesCollector
-    {
-        public string[]? Cities { get; set; }
-    }
-
-    public class City
-    {
-        public string Name { get; set; }
-        public City(string name)
+        catch (Exception ex)
         {
-            this.Name = name;
+            return null;
         }
-
     }
+}
+
+internal class CitiesCollector
+{
+    public string[]? Cities { get; set; }
+}
+
+public class City
+{
+    public City(string name)
+    {
+        Name = name;
+    }
+
+    public string Name { get; set; }
 }

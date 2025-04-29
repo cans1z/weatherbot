@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace weatherbot.Models
+namespace weatherbot.Models;
+
+public class User
 {
-    public class User
-    {
-        [Key]
-        public int Id { get; set; }
-        public long TgId { get; set; }
+    [Key] public int Id { get; set; }
 
-        [DefaultValue("Moscow")]
-        public string? City { get; set; } = "Moscow";
+    public long TgId { get; set; }
 
-        [DefaultValue("default")]
-        public string State { get; set; } = "default";
-    }
+    [DefaultValue("Moscow")] public string? City { get; set; } = "Moscow";
+
+    [DefaultValue("default")] public string State { get; set; } = "default";
 }

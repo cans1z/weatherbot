@@ -1,59 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿namespace weatherbot.Services;
 
-namespace weatherbot.Services
+internal class AiService
 {
-    internal class AiService
+    /// <summary>
+    ///     Загружает из файла 'ai_context.txt' - в этом файле описывается паттерн ответа нейросети, а также
+    ///     мы вводим нейросеть в курс дела, рассказываем что она должна делать, даем примеры.
+    /// </summary>
+    /// <returns></returns>
+    private static string GetAiContext()
     {
-        /// <summary>
-        /// Загружает из файла 'ai_context.txt' - в этом файле описывается паттерн ответа нейросети, а также 
-        /// мы вводим нейросеть в курс дела, рассказываем что она должна делать, даем примеры.
-        /// </summary>
-        /// <returns></returns>
-        private static string GetAiContext()
+        return File.ReadAllText("ai_context.txt");
+    }
+
+    public static async Task<string?> FormatWeatherByAi(string inputText)
+    {
+        try
         {
-            return File.ReadAllText("ai_context.txt");
-        }
+            var model = "gpt-4.1-mini";
+            var pattern = GetAiContext();
+            var aiAnswer = await AiApi.MakeRequest(model, pattern, inputText);
 
-        public static async Task<string?> FormatWeatherByAi(string inputText)
-        {
-            try
+            if (aiAnswer == null)
             {
-                string model = "gpt-4.1-mini";
-                string pattern = GetAiContext();
-                string? aiAnswer = await AiApi.MakeRequest(model, pattern, inputText);
-
-                if (aiAnswer == null)
-                {
-                    Console.WriteLine("Ошибка обращения к ии-модели");
-                    return null;
-                }
-
-                return aiAnswer;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("GetAiContext.FormatWeatherByAi - произошла ошибка:\n" +
-                    ex.StackTrace);
+                Console.WriteLine("Ошибка обращения к ии-модели");
                 return null;
             }
+
+            return aiAnswer;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("GetAiContext.FormatWeatherByAi - произошла ошибка:\n" +
+                              ex.StackTrace);
+            return null;
         }
     }
+}
 
-    internal class AiRequestData
-    {
-        /// <summary>
-        /// AcceptedStatus - отклонен или принят отзыв ИИ
-        /// </summary>
-        public bool AcceptedStatus { get; set; }
+internal class AiRequestData
+{
+    /// <summary>
+    ///     AcceptedStatus - отклонен или принят отзыв ИИ
+    /// </summary>
+    public bool AcceptedStatus { get; set; }
 
-        /// <summary>
-        /// Пояснение ИИ
-        /// </summary>
-        public string Summary { get; set; }
-    }
+    /// <summary>
+    ///     Пояснение ИИ
+    /// </summary>
+    public string Summary { get; set; }
 }
